@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { assets } from '../assets/assets'
-import axios from 'axios'
+import axios from "../api/axiosConfig";
 import { AppContent } from '../context/AppContext'
 import {toast} from 'react-toastify'
 import {useNavigate} from 'react-router-dom'
@@ -8,8 +8,6 @@ import {useNavigate} from 'react-router-dom'
 const EmailVerify = () => {
 
   const navigate = useNavigate();
-
-  axios.defaults.withCredentials = true;
 
   const {backendUrl, isLoggedIn, userData, getUserData} = useContext(AppContent)
 
@@ -30,7 +28,7 @@ const EmailVerify = () => {
   const handlePaste =(e)=>{
     const paste = e.clipboardData.getData('text')
     const pasteArray = paste.split('');
-    pasteArray.foreach((char,index)=>{
+    pasteArray.forEach((char,index)=>{
       if(inputRefs.current[index]){
         inputRefs.current[index].value = char;
       }
@@ -53,13 +51,13 @@ const EmailVerify = () => {
         toast.error(data.message)
       }
     } catch(error){
-      toast.error(error.message)
+      toast.error(error.response?.data?.message || error.message);
     }
   }
 
 
   useEffect(()=>{
-    isLoggedIn && userData && userData.isAccountVarified && navigate('/')
+    isLoggedIn && userData && userData.isAccountVerified && navigate('/')
   },[isLoggedIn,userData])
 
   return (
