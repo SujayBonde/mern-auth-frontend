@@ -1,0 +1,12 @@
+For Frontend Setup Download the following Packages:
+
+npm create vite@latest
+
+npm install --for dependencies
+
+npm run dev --for running project on browser
+
+npm install axios react-router-dom react-toastify
+
+Now install tailwind css with vite react
+
